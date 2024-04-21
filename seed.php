@@ -66,28 +66,37 @@ $array_students = array(
         "postcode" => "SL4 5GH",
     ),
 );
-
-foreach ($array_students as $key => $student_array) {
-    $studentid = $student_array['studentid'];
-    $password = $student_array['password'];
-    $dob = $student_array['dob'];
-    $firstname = $student_array['firstname'];
-    $lastname = $student_array['lastname'];
-    $house = $student_array['house'];
-    $town = $student_array['town'];
-    $county = $student_array['county'];
-    $country = $student_array['country'];
-    $postcode = $student_array['postcode'];
-
-    $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode) 
-        VALUES ('$studentid', '$password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country', '$postcode')";
-
-    if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully<br>";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn) . "<br>";
+    foreach ($array_students as $key => $student_array) {
+        $studentid = $student_array['studentid'];
+        // Check if studentid already exists in the database
+        $check_query = "SELECT * FROM student WHERE studentid='$studentid'";
+        $result = mysqli_query($conn, $check_query);
+        if (mysqli_num_rows($result) > 0) {
+            // Student already exists, you can skip or update the record here
+            echo "Student with ID $studentid already exists.<br>";
+            continue; // Skip inserting this record
+        }
+        // Proceed with insertion if the studentid doesn't exist
+        $password = $student_array['password'];
+        $dob = $student_array['dob'];
+        $firstname = $student_array['firstname'];
+        $lastname = $student_array['lastname'];
+        $house = $student_array['house'];
+        $town = $student_array['town'];
+        $county = $student_array['county'];
+        $country = $student_array['country'];
+        $postcode = $student_array['postcode'];
+    
+        $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode) 
+            VALUES ('$studentid', '$password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country', '$postcode')";
+    
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully for student with ID $studentid<br>";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn) . "<br>";
+        }
     }
-}
+    
 
 ?>
 
