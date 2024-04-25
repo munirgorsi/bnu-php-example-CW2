@@ -37,3 +37,29 @@ if (isset($_SESSION['id'])) {
     exit(); 
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Students</title>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete?");
+        }
+    </script>
+</head>
+<body>
+    <script>
+        // Call the function when the page is loaded to show the confirmation dialog
+        window.onload = function() {
+            var confirmed = confirmDelete();
+            if (!confirmed) {
+                // If user cancels the deletion, redirect them to index.php
+                window.location.href = "index.php";
+            }
+        };
+    </script>
+</body>
+</html>
