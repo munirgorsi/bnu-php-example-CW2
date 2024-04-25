@@ -19,7 +19,9 @@ if (isset($_SESSION['id'])) {
 
     // Prepare table for displaying student data
     $data['content'] .= "<table border='1'>";
-    $data['content'] .= "<tr><th>studentid</th><th>password</th><th>dob</th><th>firstname</th><th>lastname</th><th>house</th><th>town</th><th>county</th><th>country</th><th>postcode</th></tr>";
+    $data['content'] .= "<tr><th>studentid</th><th>password</th><th>dob</th>
+    <th>firstname</th><th>lastname</th><th>house</th><th>town</th>
+    <th>county</th><th>country</th><th>postcode</th></tr>";
 
     // Display student data in the table
     while ($row = mysqli_fetch_array($result)) {
@@ -41,14 +43,16 @@ if (isset($_SESSION['id'])) {
         $data['content'] .= "<td>{$row["county"]}</td>";
         $data['content'] .= "<td>{$row["country"]}</td>";
         $data['content'] .= "<td>{$row["postcode"]}</td>";
-        $data['content'] .= "<td><input type ='checkbox' name='students[]' value ='{$row['studentid']}'/></td>";
+        $data['content'] .= "<td><input type ='checkbox' name='students[]'
+         value ='{$row['studentid']}'/></td>";
         $data['content'] .= "</tr>";
     }
 
     $data['content'] .= "</table>";
 
     // Delete Button with confirmation
-    $data['content'] .= "<input type='submit' name='deletebtn' value ='Delete' onclick='return confirmDelete();'/>";
+    $data['content'] .= "<input type='submit' name='deletebtn' 
+    value ='Delete' onclick='return confirmDelete();'/>";
 
     $data['content'] .= "</form>";
 

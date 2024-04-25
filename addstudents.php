@@ -13,28 +13,47 @@ if (isset($_SESSION['id'])) {
 
    // if the form has been submitted
    if (isset($_POST['submit'])) {
-    var_dump($_POST);
+    //var_dump($_POST);
+
+    $hashed_password = password_hash ($_POST['password'],
+    PASSWORD_DEFAULT);
+    
+
     $sql = "INSERT INTO student(studentid, password, dob, firstname, lastname, house, town, county,
-     country, postcode) VALUES ('{$_POST['studentid']}','{$_POST['dob']}',
-     '{$_POST['firstname']}', '{$_POST['lastname']}','{$_POST['house']}',
+     country, postcode) 
+     VALUES ('{$_POST['studentid']}','$hashed_password','{$_POST['dob']}',
+     '{$_POST['firstname']}','{$_POST['lastname']}','{$_POST['house']}',
      '{$_POST['town']}','{$_POST['county']}',
-     '{$_POST['country']}','{$_POST['postcode']}',)";
-    echo $sql;
-      $result = mysqli_query($conn,$sql);
-      $data['content'] = "<p>Student Record has been added</p>";
+     '{$_POST['country']}','{$_POST['postcode']}')";
+    $result = mysqli_query($conn, $sql);
+
+    // Check if the query was successful
+    if ($result) {
+        // Display success message
+        echo "<p>Student Record has been added</p>";
+    } else {
+        // Display error message if query fails
+        echo "Error: " . mysqli_error($conn);
+    }
    }
-   else {
+   
       // using <<<EOD notation to allow building of a multi-line string
       // see http://stackoverflow.com/questions/6924193/what-is-the-use-of-eod-in-php for info
       // also http://stackoverflow.com/questions/8280360/formatting-an-array-value-inside-a-heredoc
       $data['content'] = <<<EOD
-
+   
    <h2>Add New Student</h2>
    <form name="frmdetails" action="" method="post">
+   Student ID :
+   <input name="studentid" type="text" value=""/><br/>
+   Password :
+   <input name="password" type="text" value=""/><br/>
+   Date of Birth :
+   <input name="dob" type="text" value="" required /><br/>
    First Name :
-   <input name="firstname" type="text" value="" /><br/>
+   <input name="firstname" type="text" value="" required /><br/>
    Surname :
-   <input name="lastname" type="text"  value="" /><br/>
+   <input name="lastname" type="text"  value="" required /><br/>
    Number and Street :
    <input name="house" type="text"  value="" /><br/>
    Town :
@@ -49,9 +68,6 @@ if (isset($_SESSION['id'])) {
    </form>
 
 EOD;
-
-   }
-
    // render the template
    echo template("templates/default.php", $data);
 
