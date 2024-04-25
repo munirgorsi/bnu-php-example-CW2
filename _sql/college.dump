@@ -14,7 +14,8 @@ CREATE TABLE `student` (
   `town` varchar(30) NOT NULL,
   `county` varchar(30) NOT NULL,
   `country` varchar(30) NOT NULL,
-  `postcode` varchar(10) NOT NULL
+  `postcode` varchar(10) NOT NULL,
+  `photo_url` varchar(255) NOT NULL DEFAULT ''
 );
 
 CREATE TABLE `studentmodules` (

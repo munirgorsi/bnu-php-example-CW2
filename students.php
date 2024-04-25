@@ -21,7 +21,7 @@ if (isset($_SESSION['id'])) {
     $data['content'] .= "<table border='1'>";
     $data['content'] .= "<tr><th>studentid</th><th>password</th><th>dob</th>
     <th>firstname</th><th>lastname</th><th>house</th><th>town</th>
-    <th>county</th><th>country</th><th>postcode</th></tr>";
+    <th>county</th><th>country</th><th>postcode</th><th>photo</th></tr>";
 
     // Display student data in the table
     while ($row = mysqli_fetch_array($result)) {
@@ -43,6 +43,7 @@ if (isset($_SESSION['id'])) {
         $data['content'] .= "<td>{$row["county"]}</td>";
         $data['content'] .= "<td>{$row["country"]}</td>";
         $data['content'] .= "<td>{$row["postcode"]}</td>";
+        $data['content'] .= "<td><img src='{$row["photo"]}' alt='' style='width: 100px; height: auto;'></td>";
         $data['content'] .= "<td><input type ='checkbox' name='students[]'
          value ='{$row['studentid']}'/></td>";
         $data['content'] .= "</tr>";
