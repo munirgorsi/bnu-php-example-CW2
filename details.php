@@ -4,7 +4,6 @@ include("_includes/config.inc");
 include("_includes/dbconnect.inc");
 include("_includes/functions.inc");
 
-
 // check logged in
 if (isset($_SESSION['id'])) {
 
@@ -14,53 +13,63 @@ if (isset($_SESSION['id'])) {
    // if the form has been submitted
    if (isset($_POST['submit'])) {
 
-      // build an sql statment to update the student details
-      $sql = "update student set firstname ='" . $_POST['txtfirstname'] . "',";
+      // build an sql statement to update the student details
+      $sql = "UPDATE student SET firstname ='" . $_POST['txtfirstname'] . "',";
       $sql .= "lastname ='" . $_POST['txtlastname']  . "',";
-      
       $sql .= "house ='" . $_POST['txthouse']  . "',";
       $sql .= "town ='" . $_POST['txttown']  . "',";
       $sql .= "county ='" . $_POST['txtcounty']  . "',";
       $sql .= "country ='" . $_POST['txtcountry']  . "',";
       $sql .= "postcode ='" . $_POST['txtpostcode']  . "' ";
-      $sql .= "where studentid = '" . $_SESSION['id'] . "';";
-  
-      $result = mysqli_query($conn,$sql);
+      $sql .= "WHERE studentid = '" . $_SESSION['id'] . "';";
 
-      $data['content'] = "<p>Your details have been updated</p>";
+      $result = mysqli_query($conn, $sql);
 
-   }
-   else {
-      // Build a SQL statment to return the student record with the id that
+      $data['content'] = "<div class='container'><div class='alert alert-success' role='alert'>Your details have been updated</div></div>";
+
+   } else {
+      // Build a SQL statement to return the student record with the id that
       // matches that of the session variable.
-      $sql = "select * from student where studentid='". $_SESSION['id'] . "';";
-      $result = mysqli_query($conn,$sql);
+      $sql = "SELECT * FROM student WHERE studentid='" . $_SESSION['id'] . "';";
+      $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_array($result);
 
-      // using <<<EOD notation to allow building of a multi-line string
-      // see http://stackoverflow.com/questions/6924193/what-is-the-use-of-eod-in-php for info
-      // also http://stackoverflow.com/questions/8280360/formatting-an-array-value-inside-a-heredoc
+      // Using <<<EOD notation to allow building of a multi-line string
       $data['content'] = <<<EOD
-      <div style='text-align: center;'>
-   <h2>My Details</h2>
-   <form name="frmdetails" action="" method="post">
-   First Name :
-   <input name="txtfirstname" type="text" value="{$row['firstname']}" /><br/><br/>
-   Surname :
-   <input name="txtlastname" type="text"  value="{$row['lastname']}" /><br/><br/>
-   Number and Street :
-   <input name="txthouse" type="text"  value="{$row['house']}" /><br/><br/>
-   Town :
-   <input name="txttown" type="text"  value="{$row['town']}" /><br/><br/>
-   County :
-   <input name="txtcounty" type="text"  value="{$row['county']}" /><br/><br/>
-   Country :
-   <input name="txtcountry" type="text"  value="{$row['country']}" /><br/><br/>
-   Postcode :
-   <input name="txtpostcode" type="text"  value="{$row['postcode']}" /><br/><br/>
-   <input type="submit" value="Save" name="submit"/>
-   </form>
-</div>
+      <div class='container'>
+         <h2 class='text-center'>My Details</h2>
+         <form name="frmdetails" action="" method="post">
+            <div class="mb-2">
+               <label for="txtfirstname" class="form-label">First Name</label>
+               <input name="txtfirstname" type="text" class="form-control" id="txtfirstname" value="{$row['firstname']}">
+            </div>
+            <div class="mb-3">
+               <label for="txtlastname" class="form-label">Surname</label>
+               <input name="txtlastname" type="text" class="form-control" id="txtlastname" value="{$row['lastname']}">
+            </div>
+            <div class="mb-3">
+               <label for="txthouse" class="form-label">Number and Street</label>
+               <input name="txthouse" type="text" class="form-control" id="txthouse" value="{$row['house']}">
+            </div>
+            <div class="mb-3">
+               <label for="txttown" class="form-label">Town</label>
+               <input name="txttown" type="text" class="form-control" id="txttown" value="{$row['town']}">
+            </div>
+            <div class="mb-3">
+               <label for="txtcounty" class="form-label">County</label>
+               <input name="txtcounty" type="text" class="form-control" id="txtcounty" value="{$row['county']}">
+            </div>
+            <div class="mb-3">
+               <label for="txtcountry" class="form-label">Country</label>
+               <input name="txtcountry" type="text" class="form-control" id="txtcountry" value="{$row['country']}">
+            </div>
+            <div class="mb-3">
+               <label for="txtpostcode" class="form-label">Postcode</label>
+               <input name="txtpostcode" type="text" class="form-control" id="txtpostcode" value="{$row['postcode']}">
+            </div>
+            <button type="submit" class="btn btn-primary" name="submit">Save</button>
+         </form>
+      </div>
 EOD;
 
    }

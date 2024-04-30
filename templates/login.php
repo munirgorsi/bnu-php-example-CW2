@@ -12,7 +12,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <h1 class="mt-3 text-center">Login</h1>
+      <h1 class="mt-5 text-center">Login</h1>
       <?php
       if(!empty($message)){
           echo '<div class="alert alert-danger" role="alert">' . $message . '</div>';

@@ -17,16 +17,15 @@ if (isset($_SESSION['id'])) {
     echo "<div style='display: flex; justify-content: center; align-items: top;'>";
 
     // prepare page content
-    $data['content'] .= "<table border='1'>";
-    $data['content'] .= "<tr><th style='border: 2px solid black;'>
-    Code</th><th style='border: 2px solid black;'>Name</th><th style='border:
-     2px solid black;'>Level</th></tr>";
+
+    $data['content'] .= "<table border='1' class='table table-bordered border-primary'>";
+    $data['content'] .= "<tr><th>Code</th><th>Name</th><th>Level</th></tr>";
     // Display the modules within the HTML table
     while ($row = mysqli_fetch_array($result)) {
         $data['content'] .= "<tr>";
-        $data['content'] .= "<td style='border: 2px solid black;'>" . $row['modulecode'] . "</td>";
-        $data['content'] .= "<td style='border: 2px solid black;'>" . $row['name'] . "</td>";
-        $data['content'] .= "<td style='border: 2px solid black;'>" . $row['level'] . "</td>";
+        $data['content'] .= "<td>" . $row['modulecode'] . "</td>";
+        $data['content'] .= "<td>" . $row['name'] . "</td>";
+        $data['content'] .= "<td>" . $row['level'] . "</td>";
         $data['content'] .= "</tr>";
     }
     $data['content'] .= "</table>";

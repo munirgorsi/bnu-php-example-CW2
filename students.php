@@ -18,45 +18,46 @@ if (isset($_SESSION['id'])) {
     $data['content'] .= "<form id='deleteForm' action='deletestudents.php' method='POST'>";
 
     // Prepare table for displaying student data
-    $data['content'] .= "<table border='1'>";
-    $data['content'] .= "<tr style='border: 2px solid black;'>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>studentid</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>password</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>dob</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>firstname</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>lastname</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>house</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>town</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>county</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>country</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>postcode</th>";
-$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>photo</th>";
+    $data['content'] .= "<table border='1' class='table table-bordered border-primary'>";
+
+    $data['content'] .= "<tr>";
+$data['content'] .= "<th style= text-align: center;'>studentid</th>";
+$data['content'] .= "<th style='text-align: center;'>password</th>";
+$data['content'] .= "<th style=' text-align: center;'>dob</th>";
+$data['content'] .= "<th style='text-align: center;'>firstname</th>";
+$data['content'] .= "<th style='text-align: center;'>lastname</th>";
+$data['content'] .= "<th style='text-align: center;'>house</th>";
+$data['content'] .= "<th style='text-align: center;'>town</th>";
+$data['content'] .= "<th style='text-align: center;'>county</th>";
+$data['content'] .= "<th style='text-align: center;'>country</th>";
+$data['content'] .= "<th style='text-align: center;'>postcode</th>";
+$data['content'] .= "<th style='text-align: center;'>photo</th>";
 $data['content'] .= "</tr>";
 
 
     // Display student data in the table
     while ($row = mysqli_fetch_array($result)) {
         $data['content'] .= "<tr>";
-        $data['content'] .= "<td style='border: 2px solid black;'>{$row["studentid"]}</td>";
+        $data['content'] .= "<td>{$row["studentid"]}</td>";
         // Check if the password should be hidden
         if ($hidePassword) {
             // Hide the password with #
-            $data['content'] .= "<td style='border: 2px solid black;'>####### </td>";
+            $data['content'] .= "<td>####### </td>";
         } else {
             // Display the actual password
             $data['content'] .= "<td>{$row["password"]}</td>";
         }
        
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["dob"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["firstname"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["lastname"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["house"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["town"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["county"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["country"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["postcode"]}</td>";
-        $data['content'] .= "<td style='border: 2px solid black;'><img src='{$row["photo"]}' alt='' style='width: 100px; height: auto;'></td>";
-        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'><input type ='checkbox' name='students[]'
+        $data['content'] .= "<td style='text-align: center;'>{$row["dob"]}</td>";
+        $data['content'] .= "<td style='text-align: center;'>{$row["firstname"]}</td>";
+        $data['content'] .= "<td style='text-align: center;'>{$row["lastname"]}</td>";
+        $data['content'] .= "<td style='text-align: center;'>{$row["house"]}</td>";
+        $data['content'] .= "<td style='text-align: center;'>{$row["town"]}</td>";
+        $data['content'] .= "<td style='text-align: center;'>{$row["county"]}</td>";
+        $data['content'] .= "<td style='text-align: center;'>{$row["country"]}</td>";
+        $data['content'] .= "<td style='text-align: center;'>{$row["postcode"]}</td>";
+        $data['content'] .= "<td style=''><img src='{$row["photo"]}' alt='' style='width: 100px; height: auto;'></td>";
+        $data['content'] .= "<td style='text-align: center;'><input type ='checkbox' name='students[]'
          value ='{$row['studentid']}'/></td>";
         $data['content'] .= "</tr>";
     }
