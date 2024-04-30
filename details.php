@@ -17,12 +17,14 @@ if (isset($_SESSION['id'])) {
       // build an sql statment to update the student details
       $sql = "update student set firstname ='" . $_POST['txtfirstname'] . "',";
       $sql .= "lastname ='" . $_POST['txtlastname']  . "',";
+      
       $sql .= "house ='" . $_POST['txthouse']  . "',";
       $sql .= "town ='" . $_POST['txttown']  . "',";
       $sql .= "county ='" . $_POST['txtcounty']  . "',";
       $sql .= "country ='" . $_POST['txtcountry']  . "',";
       $sql .= "postcode ='" . $_POST['txtpostcode']  . "' ";
       $sql .= "where studentid = '" . $_SESSION['id'] . "';";
+  
       $result = mysqli_query($conn,$sql);
 
       $data['content'] = "<p>Your details have been updated</p>";
@@ -39,26 +41,26 @@ if (isset($_SESSION['id'])) {
       // see http://stackoverflow.com/questions/6924193/what-is-the-use-of-eod-in-php for info
       // also http://stackoverflow.com/questions/8280360/formatting-an-array-value-inside-a-heredoc
       $data['content'] = <<<EOD
-
+      <div style='text-align: center;'>
    <h2>My Details</h2>
    <form name="frmdetails" action="" method="post">
    First Name :
-   <input name="txtfirstname" type="text" value="{$row['firstname']}" /><br/>
+   <input name="txtfirstname" type="text" value="{$row['firstname']}" /><br/><br/>
    Surname :
-   <input name="txtlastname" type="text"  value="{$row['lastname']}" /><br/>
+   <input name="txtlastname" type="text"  value="{$row['lastname']}" /><br/><br/>
    Number and Street :
-   <input name="txthouse" type="text"  value="{$row['house']}" /><br/>
+   <input name="txthouse" type="text"  value="{$row['house']}" /><br/><br/>
    Town :
-   <input name="txttown" type="text"  value="{$row['town']}" /><br/>
+   <input name="txttown" type="text"  value="{$row['town']}" /><br/><br/>
    County :
-   <input name="txtcounty" type="text"  value="{$row['county']}" /><br/>
+   <input name="txtcounty" type="text"  value="{$row['county']}" /><br/><br/>
    Country :
-   <input name="txtcountry" type="text"  value="{$row['country']}" /><br/>
+   <input name="txtcountry" type="text"  value="{$row['country']}" /><br/><br/>
    Postcode :
-   <input name="txtpostcode" type="text"  value="{$row['postcode']}" /><br/>
+   <input name="txtpostcode" type="text"  value="{$row['postcode']}" /><br/><br/>
    <input type="submit" value="Save" name="submit"/>
    </form>
-
+</div>
 EOD;
 
    }

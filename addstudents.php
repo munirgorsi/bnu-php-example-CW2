@@ -50,50 +50,52 @@ if (isset($_POST['submit'])) {
 
     // Execute the SQL statement
     $result = mysqli_query($conn, $sql);
-
-    // Check if the query was successful
-    if ($result) {
-        // Display success message
-        echo "<p>Student Record has been added</p>";
-    } else {
-        // Display error message if query fails
-        echo "Error: " . mysqli_error($conn);
-    }
+// Check if the query was successful
+if ($result) {
+   // Display success message
+   echo "<p>Student Record has been added</p>";
+} else {
+   // Display error message if query fails
+   echo "Error: " . mysqli_error($conn);
+}
+    
 }
 
 // Check if the user is logged in
 if (isset($_SESSION['id'])) {
    echo template("templates/partials/header.php");
  echo template("templates/partials/nav.php");
+ 
     // Render the form
     $data['content'] = <<<EOD
-
+    <div style='text-align: center;'>
     <h2>Add New Student</h2>
     <form name="frmdetails" action="" method="post" enctype="multipart/form-data">
     Student ID:
-    <input name="studentid" type="text" value="" /><br/>
+    <input name="studentid" type="text" value="" /><br/><br/>
     Password:
-    <input name="password" type="text" value="" /><br/>
+    <input name="password" type="text" value="" /><br/><br/>
     Date of Birth:
-    <input name="dob" type="text" value="" required /><br/>
+    <input name="dob" type="text" value="" required /><br/><br/>
     First Name:
-    <input name="firstname" type="text" value="" required /><br/>
+    <input name="firstname" type="text" value="" required /><br/><br/>
     Surname:
-    <input name="lastname" type="text" value="" required /><br/>
+    <input name="lastname" type="text" value="" required /><br/><br/>
     Number and Street:
-    <input name="house" type="text" value="" /><br/>
+    <input name="house" type="text" value="" /><br/><br/>
     Town:
-    <input name="town" type="text" value="" /><br/>
+    <input name="town" type="text" value="" /><br/><br/>
     County:
-    <input name="county" type="text" value="" /><br/>
+    <input name="county" type="text" value="" /><br/><br/>
     Country:
-    <input name="country" type="text" value="" /><br/>
+    <input name="country" type="text" value="" /><br/><br/>
     Postcode:
-    <input name="postcode" type="text" value="" /><br/>
+    <input name="postcode" type="text" value="" /><br/><br/>
     Upload image:
-    <input type="file" name="file" /><br/>
-    <input type="submit" value="Save" name="submit" />
+    <input type="file" name="file" /><br/><br/>
+    <input type="submit" value="Save" name="submit" /><br/>
     </form>
+    </div>
 
     EOD;
 

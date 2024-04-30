@@ -19,32 +19,44 @@ if (isset($_SESSION['id'])) {
 
     // Prepare table for displaying student data
     $data['content'] .= "<table border='1'>";
-    $data['content'] .= "<tr><th>studentid</th><th>password</th><th>dob</th>
-    <th>firstname</th><th>lastname</th><th>house</th><th>town</th>
-    <th>county</th><th>country</th><th>postcode</th><th>photo</th></tr>";
+    $data['content'] .= "<tr style='border: 2px solid black;'>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>studentid</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>password</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>dob</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>firstname</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>lastname</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>house</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>town</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>county</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>country</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>postcode</th>";
+$data['content'] .= "<th style='border: 2px solid black; text-align: center;'>photo</th>";
+$data['content'] .= "</tr>";
+
 
     // Display student data in the table
     while ($row = mysqli_fetch_array($result)) {
         $data['content'] .= "<tr>";
-        $data['content'] .= "<td>{$row["studentid"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black;'>{$row["studentid"]}</td>";
         // Check if the password should be hidden
         if ($hidePassword) {
             // Hide the password with #
-            $data['content'] .= "<td>####### </td>";
+            $data['content'] .= "<td style='border: 2px solid black;'>####### </td>";
         } else {
             // Display the actual password
             $data['content'] .= "<td>{$row["password"]}</td>";
         }
-        $data['content'] .= "<td>{$row["dob"]}</td>";
-        $data['content'] .= "<td>{$row["firstname"]}</td>";
-        $data['content'] .= "<td>{$row["lastname"]}</td>";
-        $data['content'] .= "<td>{$row["house"]}</td>";
-        $data['content'] .= "<td>{$row["town"]}</td>";
-        $data['content'] .= "<td>{$row["county"]}</td>";
-        $data['content'] .= "<td>{$row["country"]}</td>";
-        $data['content'] .= "<td>{$row["postcode"]}</td>";
-        $data['content'] .= "<td><img src='{$row["photo"]}' alt='' style='width: 100px; height: auto;'></td>";
-        $data['content'] .= "<td><input type ='checkbox' name='students[]'
+       
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["dob"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["firstname"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["lastname"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["house"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["town"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["county"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["country"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'>{$row["postcode"]}</td>";
+        $data['content'] .= "<td style='border: 2px solid black;'><img src='{$row["photo"]}' alt='' style='width: 100px; height: auto;'></td>";
+        $data['content'] .= "<td style='border: 2px solid black; text-align: center;'><input type ='checkbox' name='students[]'
          value ='{$row['studentid']}'/></td>";
         $data['content'] .= "</tr>";
     }
@@ -63,7 +75,6 @@ if (isset($_SESSION['id'])) {
             return confirm('Are you sure you want to delete records?');
         }
     </script>";
-
     // Render the template
     echo template("templates/default.php", $data);
 } else {

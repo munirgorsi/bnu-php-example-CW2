@@ -16,6 +16,7 @@ $array_students = array(
         "county" => "Berkshire",
         "country" => "United Kingdom",
         "postcode" => "SL1 1LM",
+        "photo" =>"C:\Users\Lenovo\OneDrive\Desktop\student3.jpg" 
     ),
     array(
         "studentid" => "22213254",
@@ -28,6 +29,7 @@ $array_students = array(
         "county" => "Berkshire",
         "country" => "United Kingdom",
         "postcode" => "SL1 3KL",
+        "photo" =>"images/student2.jpg"
     ),
     array(
         "studentid" => "22645928",
@@ -40,6 +42,7 @@ $array_students = array(
         "county" => "Berkshire",
         "country" => "United Kingdom",
         "postcode" => "RG1 3QN",
+        "photo" => "images/student2.jpg"
     ),
     array(
         "studentid" => "22275678",
@@ -52,6 +55,7 @@ $array_students = array(
         "county" => "London",
         "country" => "United Kingdom",
         "postcode" => "NW10 9YT",
+        "photo" => "images/student2.jpg"
     ),
     array(
         "studentid" => "2226543",
@@ -64,6 +68,7 @@ $array_students = array(
         "county" => "Berkshire",
         "country" => "United Kingdom",
         "postcode" => "SL4 5GH",
+        "photo" => "images/student2.jpg"
     ),
 );
     foreach ($array_students as $key => $student_array) {
@@ -86,10 +91,11 @@ $array_students = array(
         $county = $student_array['county'];
         $country = $student_array['country'];
         $postcode = $student_array['postcode'];
+        $photo = $student_array['photo'];
     
-        $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode) 
-            VALUES ('$studentid', '$password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country', '$postcode')";
-    
+        $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode, photo) 
+        VALUES ('$studentid', '$password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country', '$postcode', '$photo')";
+
         if (mysqli_query($conn, $sql)) {
             echo "New record created successfully for student with ID $studentid<br>";
         } else {
