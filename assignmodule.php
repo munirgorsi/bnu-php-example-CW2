@@ -34,7 +34,7 @@ if (isset($_SESSION['id'])) {
      $data['content'] .= "</select><br/>";
      $data['content'] .= "<input type='submit' name='confirm' value='Save' />";
      $data['content'] .= "</form>";
-     $data['content'] .= "</div>"; // Centering div ends here
+     $data['content'] .= "</div>"; 
    }
 
    // render the template

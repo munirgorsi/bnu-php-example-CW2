@@ -11,8 +11,8 @@
 <style>
   .nav-link {
     font-weight: bold;
-    color: white; /* Set text color to white */
-    cursor: pointer; /* Change cursor to pointer */
+    color: white; 
+    cursor: pointer;
   }
 </style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">

@@ -28,12 +28,12 @@ if (isset($_POST['submit'])) {
             $file_photo = $upload_dir . $file_name;
         } else {
             // Handle file upload error
-            echo "<div class='container'><div class='alert alert-danger' role='alert'>File upload failed!</div></div>";
+            echo "File upload failed!";
             exit; // Exit the script
         }
     } else {
         // Handle file upload error
-        echo "<div class='container'><div class='alert alert-danger' role='alert'>File upload error: " . $_FILES['file']['error'] . "</div></div>";
+        echo "File upload error: " . $_FILES['file']['error'];
         exit; // Exit the script
     }
 
@@ -50,14 +50,13 @@ if (isset($_POST['submit'])) {
 
     // Execute the SQL statement
     $result = mysqli_query($conn, $sql);
-
     // Check if the query was successful
     if ($result) {
         // Display success message
-        echo "<div class='container'><div class='alert alert-success' role='alert'>Student Record has been added</div></div>";
+        echo "<p>Student Record has been added</p>";
     } else {
         // Display error message if query fails
-        echo "<div class='container'><div class='alert alert-danger' role='alert'>Error: " . mysqli_error($conn) . "</div></div>";
+        echo "Error: " . mysqli_error($conn);
     }
 }
 
@@ -65,66 +64,67 @@ if (isset($_POST['submit'])) {
 if (isset($_SESSION['id'])) {
     echo template("templates/partials/header.php");
     echo template("templates/partials/nav.php");
-
-    // Render the form
-    $data['content'] = <<<EOD
-    <div class='container'>
-        <h2 class='text-center'>Add New Student</h2>
+?>
+    <!-- Render the form with Bootstrap -->
+    <div class="container">
+        <h2 class="text-center mt-5 mb-4">Add New Student</h2>
         <form name="frmdetails" action="" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="studentid" class="form-label">Student ID</label>
-                <input name="studentid" type="text" class="form-control" id="studentid" value="" required>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="form-group">
+                        <label for="studentid">Student ID:</label>
+                        <input name="studentid" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input name="password" type="password" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input name="dob" type="date" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">First Name:</label>
+                        <input name="firstname" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Surname:</label>
+                        <input name="lastname" type="text" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="house">Number and Street:</label>
+                        <input name="house" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="town">Town:</label>
+                        <input name="town" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="county">County:</label>
+                        <input name="county" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country:</label>
+                        <input name="country" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="postcode">Postcode:</label>
+                        <input name="postcode" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="file">Upload image:</label>
+                        <input type="file" name="file" class="form-control-file" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" name="submit" class="btn btn-primary" />
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="dob" class="form-label">Date of Birth</label>
-                <input name="dob" type="date" class="form-control" id="dob" required>
-            </div>
-            <div class="mb-3">
-                <label for="firstname" class="form-label">First Name</label>
-                <input name="firstname" type="text" class="form-control" id="firstname" required>
-            </div>
-            <div class="mb-3">
-                <label for="lastname" class="form-label">Surname</label>
-                <input name="lastname" type="text" class="form-control" id="lastname" required>
-            </div>
-            <div class="mb-3">
-                <label for="house" class="form-label">Number and Street</label>
-                <input name="house" type="text" class="form-control" id="house">
-            </div>
-            <div class="mb-3">
-                <label for="town" class="form-label">Town</label>
-                <input name="town" type="text" class="form-control" id="town">
-            </div>
-            <div class="mb-3">
-                <label for="county" class="form-label">County</label>
-                <input name="county" type="text" class="form-control" id="county">
-            </div>
-            <div class="mb-3">
-                <label for="country" class="form-label">Country</label>
-                <input name="country" type="text" class="form-control" id="country">
-            </div>
-            <div class="mb-3">
-                <label for="postcode" class="form-label">Postcode</label>
-                <input name="postcode" type="text" class="form-control" id="postcode">
-            </div>
-            <div class="mb-3">
-                <label for="file" class="form-label">Upload Image</label>
-                <input type="file" name="file" class="form-control" id="file required">
-            </div>
-            <button type="submit" class="btn btn-primary" name="submit">Save</button>
         </form>
     </div>
-EOD;
-
-    // Render the template
-    echo template("templates/default.php", $data);
+<?php
+    echo template("templates/partials/footer.php");
 } else {
     header("Location: index.php");
 }
-
-echo template("templates/partials/footer.php");
 ?>
