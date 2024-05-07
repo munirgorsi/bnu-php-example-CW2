@@ -41,12 +41,17 @@ if (isset($_POST['submit'])) {
     $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     // Prepare SQL statement for inserting student details into the database
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
     $sql = "INSERT INTO student(studentid, password, dob, firstname, lastname, house, town, county,
-    country, postcode, photo) 
-    VALUES ('{$_POST['studentid']}','$hashed_password','{$_POST['dob']}',
-    '{$_POST['firstname']}','{$_POST['lastname']}','{$_POST['house']}',
-    '{$_POST['town']}','{$_POST['county']}',
-    '{$_POST['country']}','{$_POST['postcode']}','$file_photo')";
+        country, postcode, photo) 
+        VALUES ('{$_POST['studentid']}','$hashed_password','{$_POST['dob']}',
+        '$firstname',
+        '{$_POST['lastname']}','{$_POST['house']}',
+        '{$_POST['town']}','{$_POST['county']}',
+        '{$_POST['country']}','{$_POST['postcode']}','$file_photo')";
+      
+    
+    echo $sql;
 
     // Execute the SQL statement
     $result = mysqli_query($conn, $sql);
